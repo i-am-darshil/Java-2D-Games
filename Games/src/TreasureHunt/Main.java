@@ -11,9 +11,18 @@ public class Main {
 
         window.setLocationRelativeTo(null); // To center the screen
         window.setVisible(true);
+        window.requestFocus();
 
-        GamePanel panel = new GamePanel();
-        window.add(panel);
+        KeyHandler keyH = new KeyHandler();
+
+        GamePanel gamePanel = new GamePanel(keyH);
+        window.add(gamePanel);
+        window.addKeyListener(keyH);
         window.pack();
+
+        System.out.println(window.getFocusOwner());
+
+        gamePanel.startGameThread();
+
     }
 }
