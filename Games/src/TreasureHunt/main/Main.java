@@ -1,4 +1,4 @@
-package TreasureHunt;
+package TreasureHunt.main;
 
 import javax.swing.*;
 
