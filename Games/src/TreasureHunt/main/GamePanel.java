@@ -11,8 +11,8 @@ public class GamePanel extends JPanel implements Runnable{
     final int scale = 3;
 
     public final int tileSize = originalTileSize * scale;
-    public final int maxScreenCol = 16;
-    public final int maxScreenRow = 12;
+    final int maxScreenCol = 16;
+    final int maxScreenRow = 12;
 
     final int screenWidth = maxScreenCol * tileSize;
     final int screeHeight = maxScreenRow * tileSize;
@@ -21,8 +21,6 @@ public class GamePanel extends JPanel implements Runnable{
     KeyHandler keyH;
     Player player;
     final int FPS = 60;
-
-    private final TileManager tileManager = new TileManager(this);
 
     public GamePanel(KeyHandler keyHr) {
         System.out.println("In Gamepanel constructor");
@@ -74,7 +72,6 @@ public class GamePanel extends JPanel implements Runnable{
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
-        tileManager.draw(g2);
         player.draw(g2);
         g2.dispose();
 
