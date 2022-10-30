@@ -18,10 +18,10 @@ public class TileManager {
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         this.tiles = new Tile[10];
-        this.mapTileNumbers = new int[gamePanel.maxScreenRow][gamePanel.maxScreenCol];
+        this.mapTileNumbers = new int[gamePanel.maxWorldRow][gamePanel.maxWorldCol];
 
         getTileImage();
-        loadMap("/maps/map01.txt");
+        loadMap("/maps/world01.txt");
     }
 
     public void getTileImage() {
@@ -34,6 +34,15 @@ public class TileManager {
 
             tiles[2] = new Tile();
             tiles[2].setImage(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/tiles/water01.png"))));
+
+            tiles[3] = new Tile();
+            tiles[3].setImage(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/tiles/earth.png"))));
+
+            tiles[4] = new Tile();
+            tiles[4].setImage(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/tiles/tree.png"))));
+
+            tiles[5] = new Tile();
+            tiles[5].setImage(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/tiles/sand.png"))));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -49,17 +58,17 @@ public class TileManager {
             int column = 0;
             int row = 0;
 
-            for (int i=0; i < gamePanel.maxScreenRow; i++) {
+            for (int i=0; i < gamePanel.maxWorldRow; i++) {
                 String line = bufferedReader.readLine();
                 String[] numbers = line.split(" ");
-                for (int j=0; j<gamePanel.maxScreenCol; j++) {
+                for (int j=0; j<gamePanel.maxWorldCol; j++) {
                     int number = Integer.parseInt(numbers[j]);
                     mapTileNumbers[i][j] = number;
                 }
             }
 
-            for (int i = 0; i < gamePanel.maxScreenRow; i++ ) {
-                for (int j = 0; j < gamePanel.maxScreenCol ; j++) {
+            for (int i = 0; i < gamePanel.maxWorldRow; i++ ) {
+                for (int j = 0; j < gamePanel.maxWorldCol ; j++) {
                     System.out.print(mapTileNumbers[i][j]);
                 }
                 System.out.println("---");
@@ -75,17 +84,25 @@ public class TileManager {
     public void draw(Graphics2D graphics2D) {
         int column = 0;
         int row = 0;
-        int x = 0;
-        int y = 0;
 
-        for (int i = 0; i < gamePanel.maxScreenRow; i++ ) {
-            x = 0;
-            for (int j = 0; j < gamePanel.maxScreenCol; j++ ) {
-                int tileNumber = mapTileNumbers[i][j];
-                graphics2D.drawImage(tiles[tileNumber].getImage(), x, y, gamePanel.tileSize, gamePanel.tileSize, null);
-                x += gamePanel.tileSize;
+        for (int worldRow = 0; worldRow < gamePanel.maxWorldRow; worldRow++ ) {
+            for (int worldCol = 0; worldCol < gamePanel.maxWorldCol; worldCol++ ) {
+                int tileNumber = mapTileNumbers[worldRow][worldCol];
+
+                int worldX = worldCol * gamePanel.tileSize;
+                int worldY = worldRow * gamePanel.tileSize;
+                int screenX = gamePanel.player.screenX + (worldX - gamePanel.player.worldX);
+                int screenY = gamePanel.player.screenY + (worldY - gamePanel.player.worldY);
+
+                if (
+                        worldX > gamePanel.player.worldX - gamePanel.player.screenX - gamePanel.tileSize &&
+                        worldX < gamePanel.player.worldX + gamePanel.player.screenX + gamePanel.tileSize &&
+                        worldY > gamePanel.player.worldY - gamePanel.player.screenY - gamePanel.tileSize &&
+                        worldY < gamePanel.player.worldY + gamePanel.player.screenY + gamePanel.tileSize
+                ) {
+                    graphics2D.drawImage(tiles[tileNumber].getImage(), screenX, screenY , gamePanel.tileSize, gamePanel.tileSize, null);
+                }
             }
-            y += gamePanel.tileSize;
         }
     }
 }
