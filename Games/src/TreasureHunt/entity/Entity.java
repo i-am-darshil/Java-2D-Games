@@ -1,5 +1,6 @@
 package TreasureHunt.entity;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Entity {
@@ -11,4 +12,8 @@ public class Entity {
     public String direction;
     public int spriteCounter = 0;
     public int spriteNumber = 1;
+
+    public Rectangle solidArea;
+
+    public boolean collisionOn = false;
 }
