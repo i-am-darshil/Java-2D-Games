@@ -28,19 +28,21 @@ public class GamePanel extends JPanel implements Runnable{
 
 
     Thread gameThread;
+
+    public CollisionChecker cChecker = new CollisionChecker(this);
     KeyHandler keyH;
     public Player player;
     final int FPS = 60;
 
-    private final TileManager tileManager = new TileManager(this);
+    public final TileManager tileManager = new TileManager(this);
 
     public GamePanel(KeyHandler keyHr) {
-        System.out.println("In Gamepanel constructor");
+//        System.out.println("In Gamepanel constructor");
         keyH = keyHr;
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true); // Enabling this improves game's rendering performance
-        System.out.println(keyH);
+//        System.out.println(keyH);
         this.setFocusable(true);
         player = new Player(this, keyH);
     }

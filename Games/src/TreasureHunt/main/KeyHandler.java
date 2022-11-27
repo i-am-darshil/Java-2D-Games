@@ -8,10 +8,10 @@ public class KeyHandler implements KeyListener {
     public boolean upPressed, downPressed, leftPressed, rightPressed;
 
     public void keyPressed (KeyEvent e) {
-        System.out.println("Key Pressed");
+//        System.out.println("Key Pressed");
         int code = e.getKeyCode();
 
-        System.out.println("Key pressed " + code);
+//        System.out.println("Key pressed " + code);
 
         if (code == KeyEvent.VK_W) {
             upPressed = true;
@@ -28,9 +28,9 @@ public class KeyHandler implements KeyListener {
     }
     // overriding the keyReleased() method of KeyListener interface where we set the text of the label when key is released
     public void keyReleased (KeyEvent e) {
-        System.out.println("Key Released");
+//        System.out.println("Key Released");
         int code = e.getKeyCode();
-        System.out.println("Key released " + code);
+//        System.out.println("Key released " + code);
         if (code == KeyEvent.VK_W) {
             upPressed = false;
         }
@@ -46,6 +46,6 @@ public class KeyHandler implements KeyListener {
     }
     // overriding the keyTyped() method of KeyListener interface where we set the text of the label when a key is typed
     public void keyTyped (KeyEvent e) {
-        System.out.println("Key Typed");
+//        System.out.println("Key Typed");
     }
 }

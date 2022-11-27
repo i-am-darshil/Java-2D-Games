@@ -12,8 +12,8 @@ import java.util.Objects;
 public class TileManager {
 
     private final GamePanel gamePanel;
-    private final Tile[] tiles;
-    private final int[][] mapTileNumbers;
+    public final Tile[] tiles;
+    public final int[][] mapTileNumbers;
 
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -31,15 +31,18 @@ public class TileManager {
 
             tiles[1] = new Tile();
             tiles[1].setImage(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/tiles/wall.png"))));
+            tiles[1].collision = true;
 
             tiles[2] = new Tile();
             tiles[2].setImage(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/tiles/water01.png"))));
+            tiles[2].collision = true;
 
             tiles[3] = new Tile();
             tiles[3].setImage(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/tiles/earth.png"))));
 
             tiles[4] = new Tile();
             tiles[4].setImage(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/tiles/tree.png"))));
+            tiles[4].collision = true;
 
             tiles[5] = new Tile();
             tiles[5].setImage(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/tiles/sand.png"))));
@@ -51,7 +54,7 @@ public class TileManager {
 
     public void loadMap(String mapPath) {
         try {
-            System.out.println("In loadMap");
+//            System.out.println("In loadMap");
             InputStream inputStream = getClass().getResourceAsStream(mapPath);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
@@ -67,12 +70,12 @@ public class TileManager {
                 }
             }
 
-            for (int i = 0; i < gamePanel.maxWorldRow; i++ ) {
-                for (int j = 0; j < gamePanel.maxWorldCol ; j++) {
-                    System.out.print(mapTileNumbers[i][j]);
-                }
-                System.out.println("---");
-            }
+//            for (int i = 0; i < gamePanel.maxWorldRow; i++ ) {
+//                for (int j = 0; j < gamePanel.maxWorldCol ; j++) {
+//                    System.out.print(mapTileNumbers[i][j]);
+//                }
+//                System.out.println("---");
+//            }
 
             bufferedReader.close();
 
