@@ -22,6 +22,7 @@ public class Main {
 
         System.out.println(window.getFocusOwner());
 
+        gamePanel.setUpGame();
         gamePanel.startGameThread();
 
     }

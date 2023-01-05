@@ -1,5 +1,7 @@
 package TreasureHunt.main;
+
 import TreasureHunt.entity.Player;
+import TreasureHunt.object.SuperObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,9 +31,12 @@ public class GamePanel extends JPanel implements Runnable{
 
     Thread gameThread;
 
+    public AssetSetter aSetter = new AssetSetter(this);
+
     public CollisionChecker cChecker = new CollisionChecker(this);
     KeyHandler keyH;
     public Player player;
+    public SuperObject[] objects;
     final int FPS = 60;
 
     public final TileManager tileManager = new TileManager(this);
@@ -45,11 +50,16 @@ public class GamePanel extends JPanel implements Runnable{
 //        System.out.println(keyH);
         this.setFocusable(true);
         player = new Player(this, keyH);
+        objects = new SuperObject[10];
     }
 
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
+    }
+
+    public void setUpGame() {
+        aSetter.setObjects();
     }
 
     @Override
@@ -87,6 +97,14 @@ public class GamePanel extends JPanel implements Runnable{
 
         Graphics2D g2 = (Graphics2D) g;
         tileManager.draw(g2);
+
+        // OBJECTS
+        for (SuperObject object : objects) {
+            if (object != null) {
+                object.draw(g2, this);
+            }
+        }
+
         player.draw(g2);
         g2.dispose();
 
