@@ -15,5 +15,6 @@ public class Entity {
 
     public Rectangle solidArea;
 
+    public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
 }
