@@ -1,5 +1,6 @@
 package TreasureHunt.main;
 
+import TreasureHunt.object.OBJ_Boot;
 import TreasureHunt.object.OBJ_Chest;
 import TreasureHunt.object.OBJ_Door;
 import TreasureHunt.object.OBJ_Key;
@@ -43,5 +44,10 @@ public class AssetSetter {
         gp.objects[6] = new OBJ_Chest();
         gp.objects[6].worldX = 10 * gp.tileSize;
         gp.objects[6].worldY = 7 * gp.tileSize;
+
+        // Boot
+        gp.objects[7] = new OBJ_Boot();
+        gp.objects[7].worldX = 37 * gp.tileSize;
+        gp.objects[7].worldY = 42 * gp.tileSize;
     }
 }
