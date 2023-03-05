@@ -33,6 +33,8 @@ public class GamePanel extends JPanel implements Runnable{
 
     public AssetSetter aSetter = new AssetSetter(this);
 
+    Sound sound = new Sound();
+
     public CollisionChecker cChecker = new CollisionChecker(this);
     KeyHandler keyH;
     public Player player;
@@ -59,6 +61,8 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void setUpGame() {
+
+        playMusic(0);
         aSetter.setObjects();
     }
 
@@ -108,5 +112,20 @@ public class GamePanel extends JPanel implements Runnable{
         player.draw(g2);
         g2.dispose();
 
+    }
+
+    public void playMusic(int index) {
+        sound.setFile(index);
+        sound.play();
+        sound.loop();
+    }
+
+    public void stopMusic() {
+        sound.stop();
+    }
+
+    public void playSoundEffect(int index) {
+        sound.setFile(index);
+        sound.play();
     }
 }
